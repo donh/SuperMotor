@@ -13,7 +13,7 @@
  * See `config/404.js` to adjust your app's 404 logic.
  *
  * Note: Sails doesn't ACTUALLY serve stuff from `assets`-- the default Gruntfile in Sails copies
- * flat files from `assets` to `.tmp/public`.  This allows you to do things like compile LESS or
+ * flat files from `assets` to `.tmp/public`.	This allows you to do things like compile LESS or
  * CoffeeScript for the front-end.
  *
  * For more information on routes, check out:
@@ -23,20 +23,20 @@
 module.exports.routes = {
 
 
-  // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
-  // default view engine) your home page.
-  //
-  // (Alternatively, remove this and add an `index.html` file in your `assets` directory)
-  '/': {
-    view: 'homepage'
-  },
+	// Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
+	// default view engine) your home page.
+	//
+	// (Alternatively, remove this and add an `index.html` file in your `assets` directory)
+	'/': {
+		view: 'home'
+		//view: 'homepage'
+	},
 
 
-  // Custom routes here...
+	// Custom routes here...
 
-
-  // If a request to a URL doesn't match any of the custom routes above,
-  // it is matched against Sails route blueprints.  See `config/blueprints.js`
-  // for configuration options and examples.
+	// If a request to a URL doesn't match any of the custom routes above,
+	// it is matched against Sails route blueprints.	See `config/blueprints.js`
+	// for configuration options and examples.
 
 };
