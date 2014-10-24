@@ -1,0 +1,155 @@
+# @site name:		nginx/default
+#					/etc/nginx/sites-available/default
+# @description:		This site file sets default configuration for nginx.
+# @related issues:	SM-001
+# @author:			Don Hsieh
+# @since:			10/24/2014
+# @last modified:	10/24/2014
+# @called by:		/etc/nginx
+#
+
+# You may add here your
+# server {
+#	...
+# }
+# statements for each of your virtual hosts to this file
+
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+upstream sm_upstream {
+	#server 127.0.0.1;
+	server 127.0.0.1:1337;
+	keepalive 64;
+}
+
+server {
+	set $host_path "/var/www";
+	set $index   "index.php";
+
+	#listen 127.0.0.1;
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+
+	root $host_path/sm/sail;
+
+	index index.php index.html index.htm;
+
+	# Make site accessible from http://localhost/
+	server_name localhost;
+	#server_name epic.don.com;
+
+	charset utf-8;
+
+	location = /favicon.ico {
+		root /var/www/sm/;
+		log_not_found off;
+		access_log off;
+	}
+
+#	location = /robots.txt {
+#		allow all;
+#		log_not_found off;
+#		access_log off;
+#	}
+
+	location /img/ {
+		root /var/www/sm/;
+		autoindex off;
+	}
+
+	location ~ /(images|js|css|styles)/ {
+		rewrite ^(.*)$ /assets/$1 break;
+	}
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		#try_files $uri $uri/ =404;
+		#proxy_pass http://localhost:1337;
+		proxy_pass http://sm_upstream;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-NginX-Proxy true;
+		proxy_redirect off;
+	}
+
+	location /home {
+		try_files $uri $uri/ /home/index.php?r=$request_uri;
+	}
+
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+	location ~ \.php {
+		try_files $uri =404;
+		fastcgi_split_path_info ^(.+\.php)(.*)$;
+		#let yii catch the calls to unexising PHP files
+		set $fsn /$index;
+		if (-f $document_root$fastcgi_script_name){
+			set $fsn $fastcgi_script_name;
+		}
+
+#		fastcgi_pass   127.0.0.1:9000;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param  SCRIPT_FILENAME  $document_root$fsn;
+		#fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param PATH_INFO $fastcgi_script_name;
+		access_log off;
+
+		fastcgi_param  PATH_TRANSLATED  $document_root$fsn;
+	}
+
+
+	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
+	#location /RequestDenied {
+	#	proxy_pass http://127.0.0.1:8080;    
+	#}
+
+	#error_page 404 /404.html;
+
+	# redirect server error pages to the static page /50x.html
+	#
+	#error_page 500 502 503 504 /50x.html;
+	#location = /50x.html {
+	#	root /usr/share/nginx/html;
+	#}
+
+	location /phpmyadmin {
+		root /usr/share/;
+		index index.php index.html index.htm;
+		location ~ ^/phpmyadmin/(.+\.php)$ {
+			try_files $uri =404;
+			root /usr/share/;
+			fastcgi_pass unix:/var/run/php5-fpm.sock;
+			#fastcgi_pass 127.0.0.1:9000;
+			fastcgi_index index.php;
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			include /etc/nginx/fastcgi_params;
+		}
+		location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+			root /usr/share/;
+		}
+	}
+	location /phpMyAdmin {
+		rewrite ^/* /phpmyadmin last;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	#
+	location ~ /\.ht {
+		deny all;
+	}
+}
