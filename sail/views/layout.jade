@@ -1,18 +1,31 @@
+//- * @jade name:		sail/views/layout.jade
+//- * @description:		This jade is the default layout and renders navbar.
+//- * @related issues:	SM-001
+//- * @param:			object req
+//- * @author:			Don Hsieh
+//- * @since:			10/24/2014
+//- * @last modified: 	10/24/2014
+//- * @called by:		All jades which extend this jade
 doctype html
 html
-  head
-    title= title
+	head
+		//-title= title
+		title= 'Super Motor'
 
-    // Viewport mobile tag for sensible mobile support
-    meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+		// Viewport mobile tag for sensible mobile support
+		meta(charset='UTF-8')
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+		meta(name='Description', content='We provides tools for maintaining scooters and motorcycles')
+		meta(name='author', content='Don Hsieh')
 
-    block styles
+		link(rel='stylesheet', href='/css/supermotor.css')
+		
+		block styles
 
-  body
-    block body
+	body
+		block body
 
-    // The linker searches for this tag and adds js.  If there's no linker, we point to sails.io.js
-    // SCRIPTS
-    script(src="/js/dependencies/sails.io.js")
-    // SCRIPTS END
-
+		// The linker searches for this tag and adds js.	If there's no linker, we point to sails.io.js
+		// SCRIPTS
+script(src="/js/dependencies/sails.io.js")
+// SCRIPTS END
