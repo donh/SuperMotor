@@ -24,7 +24,8 @@
     "grunt-contrib-coffee": "~0.10.1",
     "jade": "~1.7.0",
     "bcrypt": "~0.8.0",
-    "sails-mysql": "~0.10.6"
+    "sails-mysql": "~0.10.6",
+    "lodash": "~2.4.1"
   },
   "scripts": {
     "start": "node app.js",
