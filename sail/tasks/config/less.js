@@ -13,6 +13,7 @@
 module.exports = function(grunt) {
 
 	grunt.config.set('less', {
+		/*
 		dev: {
 			files: [{
 				expand: true,
@@ -22,6 +23,7 @@ module.exports = function(grunt) {
 				ext: '.css'
 			}]
 		}
+		*/
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-less');
