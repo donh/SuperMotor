@@ -1,0 +1,42 @@
+//- * @jade name:		views/home.jade
+//- * @description:		This jade renders home page.
+//- * @related issues:	SM-001
+//- * @param:			object req
+//- * @author:			Don Hsieh
+//- * @since:			10/25/2014
+//- * @last modified: 	10/25/2014
+//- * @called by:		URL '/'
+extends ../layout
+
+block styles
+		
+block body
+	.container
+		each row in rows
+			.row
+				each item in row
+					.span4
+						a(href='/#{item[1]}')
+							h2 #{item[0]}
+						img.featurette-image.pull-right(src='/img/#{item[1]}/#{item[2]}', width='#{item[3]}', height='#{item[4]}')
+						p: a.btn(href='#') View details »
+
+		//- Grid system
+		section#contact
+			.row-fluid
+				//-<!--<h1>Contact</h1>-->
+				h3 超級動能有限公司
+				ul
+					li tel: (02) 2595-1814
+					li e-mail: super.motor@msa.hinet.net
+					li address: 台北市大同區迪化街二段 172 巷 17 號
+					li cell phone: 0932-058-406
+		hr
+		footer#footer
+			p.muted Copyright © 2014 Super Motor, LLC
+
+	//-script(src='/js/jquery-1.10.2.min.js', type='text/javascript') //-shall move to layout.jade?
+
+	script(type='text/javascript').
+		'use strict';
+		

@@ -64,7 +64,7 @@ module.exports = {
 		}
 		console.log('rows =', rows);
 		res.view({
-			items: rows
+			rows: rows
 		});
 	},
 
