@@ -28,7 +28,9 @@ module.exports.routes = {
 	//
 	// (Alternatively, remove this and add an `index.html` file in your `assets` directory)
 	'/': {
-		view: 'home'
+		controller: 'HomeController',
+		action: 'index'
+		//view: 'home'
 		//view: 'homepage'
 	},
 
