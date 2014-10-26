@@ -43,7 +43,7 @@ module.exports = {
 		var items = [];
 		var item = [];
 		for(var i in arr) {
-			if (i > 0) {
+			if (i > 0 && arr[i]) {
 				//console.log(arr[i]);
 				//item = _.toArray(arr[i]);
 				item = arr[i].split(',');
@@ -62,6 +62,7 @@ module.exports = {
 				row = [];
 			}
 		}
+		if (row !== []) rows.push(row);
 		console.log('rows =', rows);
 		res.view({
 			rows: rows

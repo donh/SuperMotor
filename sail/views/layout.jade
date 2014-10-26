@@ -4,7 +4,7 @@
 //- * @param:			object req
 //- * @author:			Don Hsieh
 //- * @since:			10/24/2014
-//- * @last modified: 	10/24/2014
+//- * @last modified: 	10/26/2014
 //- * @called by:		All jades which extend this jade
 doctype html
 html
@@ -31,13 +31,13 @@ html
 			.navbar
 				.navbar-inner
 					ul.nav
-						li.active: a(href='./index.html#') 首頁
+						li#home.active: a(href='/') 首頁
 						//-li.active: a(href='./index.html#about') About
-						li: a(href='./workbench.html') 工作台
-						li: a(href='./pneumatic.html') 氣動工具
-						li: a(href='./general.html') 通用工具
-						li: a(href='./special.html') 特殊工具
-						li: a(href='#contact') 聯絡我們
+						li#workbench: a(href='/workbench') 工作台
+						li#pneumatic: a(href='/pneumatic') 氣動工具
+						li#general: a(href='/general') 通用工具
+						li#special: a(href='/special') 特殊工具
+						li#contact: a(href='#contact') 聯絡我們
 					//- Main hero unit for a primary marketing message or call to action
 			.hero-unit
 				h1 超級動能

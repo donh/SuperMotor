@@ -38,12 +38,13 @@ module.exports = {
 		console.log('PneumaticController - index: function (req, res)');
 		var fs = require('fs');
 		//var _ = require('lodash');
-		var arr = fs.readFileSync('../data/pneumatic.csv').toString().split('\n');
+		//var arr = fs.readFileSync('../data/pneumatic.csv').toString().split('\n');
+		var arr = fs.readFileSync('../data/pneumatic.txt').toString().split('\n');
 		console.log('arr =', arr);
 		var items = [];
 		var item = [];
 		for(var i in arr) {
-			if (i > 0) {
+			if (i > 0 && arr[i]) {
 				item = arr[i].split(',');
 				items.push(item);
 			}
@@ -60,6 +61,7 @@ module.exports = {
 				row = [];
 			}
 		}
+		if (row !== []) rows.push(row);
 		console.log('rows =', rows);
 		res.view({
 			rows: rows
