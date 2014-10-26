@@ -5,7 +5,7 @@
 // package.json
 // npm i
 /**
- * GeneralController
+ * SpecialController
  *
  * @module		:: Controller
  * @description	:: A set of functions called `actions`.
@@ -24,7 +24,7 @@
 module.exports = {
 	/**
 	 * @function name:	index: function (req, res)
-	 * @description:	This function renders general page.
+	 * @description:	This function renders special page.
 	 * @related issues:	SM-001
 	 * @param:			object req
 	 * @param:			object res
@@ -35,10 +35,10 @@ module.exports = {
 	 * @called by:		URL '/'
 	 */
 	index: function (req, res) {
-		console.log('GeneralController - index: function (req, res)');
+		console.log('SpecialController - index: function (req, res)');
 		var fs = require('fs');
 		//var _ = require('lodash');
-		var arr = fs.readFileSync('../data/general.csv').toString().split('\n');
+		var arr = fs.readFileSync('../data/special.csv').toString().split('\n');
 		//var arr = fs.readFileSync('../data/pneumatic.txt').toString().split('\n');
 		console.log('arr =', arr);
 		var items = [];
@@ -70,7 +70,7 @@ module.exports = {
 
 	/**
 	 * Overrides for the settings in `config/controllers.js`
-	 * (specific to GeneralController)
+	 * (specific to SpecialController)
 	 */
 	_config: {}
 };
