@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import './page.css';
-import MyHeader from './Header.vue';
+import './page.css'
+import MyHeader from './Header.vue'
 
 export default {
   name: 'my-page',
@@ -64,20 +64,20 @@ export default {
 
   data() {
     return {
-      user: null,
-    };
+      user: null
+    }
   },
 
   methods: {
     onLogin() {
-      this.user = { name: 'Jane Doe' };
+      this.user = { name: 'Jane Doe' }
     },
     onLogout() {
-      this.user = null;
+      this.user = null
     },
     onCreateAccount() {
-      this.user = { name: 'Jane Doe' };
-    },
-  },
-};
+      this.user = { name: 'Jane Doe' }
+    }
+  }
+}
 </script>
