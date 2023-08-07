@@ -5,6 +5,11 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
+    <!-- <div *class*="justify-center flex bg-yellow-300 items-center h-screen">
+      <div *class*="text-4xl">Hello 👋🏼</div> -->
+    <div class="justify-center flex bg-yellow-300 items-center h-screen">
+      <div class="text-4xl">Hello 👋🏼</div>
+    </div>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">

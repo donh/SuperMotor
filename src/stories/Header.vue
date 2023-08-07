@@ -1,5 +1,7 @@
 <template>
-  <header>
+  <!-- <header> -->
+  <header class="bg-orange-200">
+    <!-- <header className="bg-orange-200"> -->
     <div class="storybook-header">
       <div>
         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
